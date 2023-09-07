@@ -1,11 +1,23 @@
-const userLoginHandler = (req, res) => {
-	res.status(201);
-	res.json({
-		id: 1,
-		mail: "test@mail.ru",
-	});
+const getLogin = (req, res) => {
+	res.status(200).render("user/login");
+};
+
+const postLogin = (req, res) => {
+	res.send("postLogin");
+};
+
+const getMe = (req, res) => {
+	const user = { name: "Mikele" };
+	res.status(200).render("user/me", user);
+};
+
+const postSignup = (req, res) => {
+	res.send("postSignup");
 };
 
 module.exports = {
-	login: userLoginHandler,
+	getLogin: getLogin,
+	postLogin: postLogin,
+	getMe: getMe,
+	postSignup: postSignup,
 };
