@@ -4,7 +4,8 @@ const passport = require("./api/passport");
 const mongoose = require("mongoose");
 
 const booksRouter = require("./routes/apiBookRouter");
-const userRouter = require("./routes/apiUserRouter");
+const apiUserRouter = require("./routes/apiUserRouter");
+// const uiUserRouter = require("./routes/uiUserRouter");
 
 const app = express();
 
@@ -15,7 +16,8 @@ app.use(passport.initialize());
 app.use(passport.session());
 
 app.use("/api/books", booksRouter);
-app.use("/api/user", userRouter);
+app.use("/api/user", apiUserRouter);
+// app.use("/user", uiUserRouter);
 
 const start = async (port, url) => {
 	await mongoose.connect(url, {

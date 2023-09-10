@@ -21,24 +21,20 @@ const addUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-	console.log("req.user: ", req.user);
-	res.redirect("/api/user/me");
-};
-
-const logoutUser = async (req, res) => {
-	req.logout();
-	res.redirect("/");
+	res.json(req.user);
 };
 
 const profileUser = async (req, res) => {
-	const user = req.user;
-	console.log("USER", user);
-	res.render("user/me", { user });
+	res.json(req.user);
 };
+
+const getLogin = (req, res) => {
+	res.send("страница с формой входа / регистрации")
+}
 
 module.exports = {
 	add: addUser,
 	login: loginUser,
-	logout: logoutUser,
 	profile: profileUser,
+	getLogin: getLogin,
 };
