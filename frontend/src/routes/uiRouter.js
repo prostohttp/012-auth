@@ -5,7 +5,6 @@ const fileMulter = require("../middleware/file");
 const uiRouter = express.Router();
 
 uiRouter.get("/", apiUi.index);
-
 uiRouter.get("/books/create", apiUi.create);
 uiRouter.post(
 	"/books/create",
@@ -15,7 +14,6 @@ uiRouter.post(
 	]),
 	apiUi.add
 );
-
 uiRouter.get("/books/:id/update", apiUi.edit);
 uiRouter.post(
 	"/books/:id/update",
@@ -25,9 +23,7 @@ uiRouter.post(
 	]),
 	apiUi.update
 );
-
 uiRouter.get("/books/:id", apiUi.view);
-
 uiRouter.get("/books/:id/delete", apiUi.delete);
 
 module.exports = uiRouter;

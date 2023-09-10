@@ -26,7 +26,7 @@ const addBookHandler = async (req, res) => {
     title,
     description,
     authors,
-    favorite: false,
+    favorite: favorite || false,
     fileName: title,
     filecover: fileCover ? `/${fileCover[0].path}` : `/public/no-image.jpeg`,
     filebook: fileBook ? `/${fileBook[0].path}` : `/public/no-image.jpeg`,
@@ -103,7 +103,7 @@ const deleteHandler = async (req, res) => {
   if (book._id === id) {
     await api.fetch(`${BASE_URL}:${PORT}/counter/${id}/del`, "POST");
     await api.fetch(`${DB_URL}:${DB_PORT}/api/books/${id}`, "DELETE");
-    res.redirect("/");
+    res.status(204).redirect("/");
   } else {
     res.status(404);
     res.render("notFound");
