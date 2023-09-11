@@ -25,7 +25,12 @@ const loginUser = async (req, res) => {
 };
 
 const profileUser = async (req, res) => {
-	res.json(req.user);
+	const user = res.user;
+	if (!user) {
+		res.status(404).json({ error: "Пользователь не авторизован" });
+	} else {
+		res.json(req.user);
+	}
 };
 
 const getLogin = (req, res) => {
