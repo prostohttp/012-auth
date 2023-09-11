@@ -23,7 +23,7 @@
 	<span class="tab" data-tab="register">Регистрация</span>
 </h1>
 <div class="register hidden flex justify-center">
-	<form method="post" action="/api/user/signup">
+	<form method="post" action="/user/signup">
 		<label for="userName" class="block mb-[2px] mt-[20px] font-bold">Имя</label>
 		<input
 			required
@@ -56,7 +56,12 @@
 	</form>
 </div>
 <div class="login flex justify-center">
-	<form method="post" action="/api/user/login">
+	<form method="post" action="/user/login">
+		<div>
+			<% if(error.message) { %>
+			<p class="text-white bg-[#333] text-center rounded-[3px] py-[7px] px-[20px] mb-[10px]"><%= error.message %></p>
+			<% } %>
+		</div>
 		<label for="userLogin" class="block mb-[2px] font-bold">Логин</label>
 		<input
 			required

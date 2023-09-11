@@ -3,9 +3,10 @@ const session = require("express-session");
 const passport = require("./api/passport");
 const mongoose = require("mongoose");
 
-const booksRouter = require("./routes/apiBookRouter");
+const apiBooksRouter = require("./routes/apiBookRouter");
+const uiBooksRouter = require("./routes/uiBookRouter");
 const apiUserRouter = require("./routes/apiUserRouter");
-// const uiUserRouter = require("./routes/uiUserRouter");
+const uiUserRouter = require("./routes/uiUserRouter");
 
 const app = express();
 
@@ -15,9 +16,10 @@ app.use(session({ secret: "SECRET" }));
 app.use(passport.initialize());
 app.use(passport.session());
 
-app.use("/api/books", booksRouter);
+app.use("/api/books", apiBooksRouter);
 app.use("/api/user", apiUserRouter);
-// app.use("/user", uiUserRouter);
+app.use("/books", uiBooksRouter);
+app.use("/user", uiUserRouter);
 
 const start = async (port, url) => {
 	await mongoose.connect(url, {

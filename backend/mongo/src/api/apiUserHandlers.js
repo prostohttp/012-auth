@@ -13,7 +13,7 @@ const addUser = async (req, res) => {
 			await user.save();
 			res.status(201).json(user);
 		} else {
-			res.status(404).send({ error: "Такой пользователь уже существует" });
+			res.status(404).json({ error: "Такой пользователь уже существует" });
 		}
 	} catch (error) {
 		res.status(500).json(error.message);
@@ -29,8 +29,8 @@ const profileUser = async (req, res) => {
 };
 
 const getLogin = (req, res) => {
-	res.send("страница с формой входа / регистрации")
-}
+	res.send("страница с формой входа / регистрации");
+};
 
 module.exports = {
 	add: addUser,

@@ -7,7 +7,7 @@ const DB_PORT = process.env.DB_PORT || 3334;
 const DB_URL = process.env.DB_URL || "http://backend-mongo";
 
 const indexHandler = async (_, res) => {
-  const books = await api.fetch(`${DB_URL}:${DB_PORT}/api/books`);
+  const books = await api.fetch(`${DB_URL}:${DB_PORT}/books`);
   res.render("books/index", { books: books });
 };
 
@@ -44,7 +44,7 @@ const addBookHandler = async (req, res) => {
 
 const editHandler = async (req, res) => {
   const { id } = req.params;
-  const book = await api.fetch(`${DB_URL}:${DB_PORT}/api/books/${id}`);
+  const book = await api.fetch(`${DB_URL}:${DB_PORT}/books/${id}`);
   if (book) {
     res.render("books/update", { book: book });
   } else {
@@ -55,7 +55,7 @@ const editHandler = async (req, res) => {
 
 const updateHandler = async (req, res) => {
   const { id } = req.params;
-  const book = await api.fetch(`${DB_URL}:${DB_PORT}/api/books/${id}`);
+  const book = await api.fetch(`${DB_URL}:${DB_PORT}/books/${id}`);
   const { title, description, authors, favorite, filecover, filebook } =
     req.body;
   let data;
@@ -73,7 +73,7 @@ const updateHandler = async (req, res) => {
   };
 
   if (book._id === id) {
-    await api.fetch(`${DB_URL}:${DB_PORT}/api/books/${id}`, "PUT", data);
+    await api.fetch(`${DB_URL}:${DB_PORT}/books/${id}`, "PUT", data);
     res.status(204);
     res.redirect(`/books/${id}/update`);
   } else {
@@ -84,7 +84,7 @@ const updateHandler = async (req, res) => {
 
 const viewHandler = async (req, res) => {
   const { id } = req.params;
-  const book = await api.fetch(`${DB_URL}:${DB_PORT}/api/books/${id}`);
+  const book = await api.fetch(`${DB_URL}:${DB_PORT}/books/${id}`);
   if (book._id === id) {
     const response = await api.fetch(
       `${BASE_URL}:${PORT}/counter/${id}/incr`,
@@ -99,10 +99,10 @@ const viewHandler = async (req, res) => {
 
 const deleteHandler = async (req, res) => {
   const { id } = req.params;
-  const book = await api.fetch(`${DB_URL}:${DB_PORT}/api/books/${id}`);
+  const book = await api.fetch(`${DB_URL}:${DB_PORT}/books/${id}`);
   if (book._id === id) {
     await api.fetch(`${BASE_URL}:${PORT}/counter/${id}/del`, "POST");
-    await api.fetch(`${DB_URL}:${DB_PORT}/api/books/${id}`, "DELETE");
+    await api.fetch(`${DB_URL}:${DB_PORT}/books/${id}`, "DELETE");
     res.status(204).redirect("/");
   } else {
     res.status(404);

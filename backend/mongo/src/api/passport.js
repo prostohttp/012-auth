@@ -5,8 +5,12 @@ const User = require("../model/User");
 const verify = async (userLogin, userPassword, done) => {
 	try {
 		const user = await User.findOne({ userLogin, userPassword }).exec();
-		if (!user) return done(null, false);
-		if (user) return done(null, user);
+		if (!user) {
+			return done(null, false);
+		}
+		if (user) {
+			return done(null, user);
+		}
 	} catch (error) {
 		return done(error, false);
 	}
