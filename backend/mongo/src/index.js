@@ -12,7 +12,14 @@ const app = express();
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-app.use(session({ secret: "SECRET" }));
+app.use(
+	session({
+		secret: "SECRET",
+		resave: false,
+		saveUninitialized: false,
+		cookie: { secure: true },
+	})
+);
 app.use(passport.initialize());
 app.use(passport.session());
 

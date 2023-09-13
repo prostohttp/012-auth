@@ -21,18 +21,22 @@ const addUser = async (req, res) => {
 };
 
 const loginUser = async (req, res) => {
-  //TODO сделать проверку на авторизацию
+	req.session.userId = Math.random();
+	console.log("Успешная аутентификация", req.session.userId);
 	res.json(req.user);
 };
 
 const profileUser = async (req, res) => {
-  //TODO сделать проверку на авторизацию
-	res.json(req.user);
+	//TODO сделать проверку на авторизацию
+	if(req.session.userId) {
+		res.json(req.user);
+	} else {
+		res.status(401).send({ error: "Необходима авторизация" });
+	}
 };
 
 const getLogin = (req, res) => {
-  //TODO сделать проверку на авторизацию
-	res.send("страница с формой входа / регистрации");
+	res.json(req.user);
 };
 
 module.exports = {
